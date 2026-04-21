@@ -7,7 +7,7 @@ services:
   autoDeploy: false
   disk:
     name: wordpress
-    mountPath: /var/www/html
+    mountPath: /var/www/html/wp-content
     sizeGB: 20
   envVars:
   - key: WORDPRESS_DB_HOST
