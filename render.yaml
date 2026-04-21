@@ -3,6 +3,7 @@ services:
   name: wordpress
   env: docker
   plan: standard
+  region: singapore    
   autoDeploy: false
   disk:
     name: wordpress
@@ -34,6 +35,7 @@ services:
   repo: https://github.com/render-examples/mysql.git
   env: docker
   plan: standard
+  region: singapore    
   autoDeploy: false
   disk:
     name: mysql-wordpress
