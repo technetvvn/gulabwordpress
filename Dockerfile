@@ -1,9 +1,12 @@
 FROM wordpress:latest
 
-# Fix tar permission error on Render disk mounts
-RUN sed -i 's/| tar --extract --file - --directory/| tar --no-same-permissions --extract --file - --directory/g' /usr/local/bin/docker-entrypoint.sh
+RUN echo "memory_limit = 512M" > /usr/local/etc/php/conf.d/custom.ini \
+    && echo "max_execution_time = 600" >> /usr/local/etc/php/conf.d/custom.ini \
+    && echo "max_input_time = 600" >> /usr/local/etc/php/conf.d/custom.ini \
+    && echo "max_input_vars = 10000" >> /usr/local/etc/php/conf.d/custom.ini \
+    && echo "post_max_size = 128M" >> /usr/local/etc/php/conf.d/custom.ini \
+    && echo "upload_max_filesize = 64M" >> /usr/local/etc/php/conf.d/custom.ini
 
-# Add persistent storage setup script
 COPY wp-setup.sh /usr/local/bin/wp-setup.sh
 RUN chmod +x /usr/local/bin/wp-setup.sh
 
