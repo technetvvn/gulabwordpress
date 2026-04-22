@@ -4,7 +4,7 @@ services:
   env: docker
   plan: standard
   region: singapore    
-  autoDeploy: false
+  autoDeploy: true
   disk:
     name: wordpress
     mountPath: /mnt/wp-content
@@ -36,7 +36,7 @@ services:
   env: docker
   plan: standard
   region: singapore    
-  autoDeploy: false
+  autoDeploy: true
   disk:
     name: mysql-wordpress
     mountPath: /var/lib/mysql
