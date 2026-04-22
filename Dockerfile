@@ -8,7 +8,13 @@ RUN echo "memory_limit = 512M" > /usr/local/etc/php/conf.d/custom.ini \
     && echo "post_max_size = 128M" >> /usr/local/etc/php/conf.d/custom.ini \
     && echo "upload_max_filesize = 64M" >> /usr/local/etc/php/conf.d/custom.ini
 
-# Patch wp-config-docker.php at BUILD TIME — permanent fix!
+# Install WP-CLI permanently
+RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
+    && chmod +x wp-cli.phar \
+    && mv wp-cli.phar /usr/local/bin/wp \
+    && wp --info --allow-root
+
+# Patch table prefix at build time
 RUN sed -i "s/\$table_prefix = getenv_docker('WORDPRESS_TABLE_PREFIX', 'wp_');/\$table_prefix = 'a6_';/" \
     /usr/src/wordpress/wp-config-docker.php
 
