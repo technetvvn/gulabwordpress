@@ -2,8 +2,8 @@ services:
 - type: web
   name: wordpress
   env: docker
-  plan: standard
-  region: singapore    
+  plan: pro
+  region: singapore
   autoDeploy: true
   disk:
     name: wordpress
@@ -30,13 +30,17 @@ services:
       name: mysql-wordpress
       type: pserv
       envVarKey: MYSQL_PASSWORD
+  - key: WORDPRESS_TABLE_PREFIX
+    value: a6_
+  - key: WORDPRESS_CONFIG_EXTRA
+    value: "define('FS_METHOD','direct'); define('WP_HOME','https://aeoc.in'); define('WP_SITEURL','https://aeoc.in');"
 - type: pserv
   name: mysql-wordpress
   repo: https://github.com/render-examples/mysql.git
   env: docker
   plan: standard
-  region: singapore    
-  autoDeploy: true
+  region: singapore
+  autoDeploy: false
   disk:
     name: mysql-wordpress
     mountPath: /var/lib/mysql
